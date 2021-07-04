@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="godot-gym"
+config/name="gym-godot"
 run/main_scene="res://examples/mars_lander/Root.tscn"
 config/icon="res://icon.png"
 
