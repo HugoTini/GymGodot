@@ -47,13 +47,15 @@ Description : [pendulum.md](gym-godot/examples/pendulum/pendulum.md)
 
 ### Mars Lander
 
+`godot-gym/examples/mars_lander/`
+
 ![mars_lander](./gym-godot/examples/mars_lander/output.gif)
 
 Description : [mars_lander.md](gym-godot/examples/mars_lander/mars_lander.md)
 
 ## Notes
 
-- Make sure to open the project ([gym-godot/project.godot](gym-godot/project.godot)) in the Godot Editor at least once before using the example environments (so that the resources are imported).
+- Make sure to open the project (`gym-godot/project.godot`) in the Godot Editor at least once before using the example environments (so that the resources are imported).
 
 - Only tested on Linux & Godot 3.3.
 
