@@ -25,7 +25,7 @@ Communications between the server and client are done with WebSocket JSON messag
 - In the inspector, set GymGodot Node's '_Environment Node_' property to your '_Environment node_'.
 - On the python side, install gym-server with : `pip install -e gym-server`. Use it in your training script like a regular Gym environment.
 
-A step-by-step tutorial is available in the [tutorial.ipynb](godot-gym/examples/cartpole/tutorial.ipynb) notebook.
+A step-by-step tutorial is available in the [tutorial.ipynb](gym-godot/examples/cartpole/tutorial.ipynb) notebook.
 
 ## Example environments
 
