@@ -1,0 +1,112 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://GymGodot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://examples/cartpole/Environment.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 1, 1, 1, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 80, 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_color = Color( 0.839216, 0.839216, 0.839216, 1 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.5, 2, 4 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 1, 4, 8 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+albedo_color = Color( 0.670588, 0.670588, 0.670588, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.278431, 0.54902, 0.74902, 1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.278431, 0.54902, 0.74902, 1 )
+
+[sub_resource type="CylinderMesh" id=10]
+material = SubResource( 9 )
+radial_segments = 32
+
+[sub_resource type="SpatialMaterial" id=11]
+flags_unshaded = true
+albedo_color = Color( 0.278431, 0.54902, 0.74902, 1 )
+
+[sub_resource type="BoxShape" id=12]
+
+[node name="Root" type="Spatial"]
+
+[node name="GodotGym" parent="." instance=ExtResource( 1 )]
+environmentNode = NodePath("../Env")
+
+[node name="Env" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="Env"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -50, 0, 0 )
+projection = 1
+size = 80.0
+
+[node name="Line" type="MeshInstance" parent="Env"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Cart" type="RigidBody" parent="Env"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="CollisionShape" type="CollisionShape" parent="Env/Cart"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Env/Cart"]
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="HingeJoint" type="HingeJoint" parent="Env"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+nodes/node_a = NodePath("../Cart")
+nodes/node_b = NodePath("../Pendulum")
+motor/target_velocity = 78.67
+
+[node name="Pendulum" type="RigidBody" parent="Env"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+mass = 0.5
+gravity_scale = 14.0
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+angular_damp = 0.5
+
+[node name="Cube" type="MeshInstance" parent="Env/Pendulum"]
+transform = Transform( 1, 0, 0, 0, 6, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="Cylinder1" type="MeshInstance" parent="Env/Pendulum"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 6, 0 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 9 )
+
+[node name="Cylinder2" type="MeshInstance" parent="Env/Pendulum"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -6, 0 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Env/Pendulum"]
+transform = Transform( 1, 0, 0, 0, 6, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 12 )
